@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feira de Jogos - SNCT 2026</title>
+  
+  <!-- Tipografia estilo Nintendo / Arcade -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700;800&family=Press+Start+2P&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --nintendo-red: #E60012;
+      --mario-blue: #009BE8;
+      --star-yellow: #FFD200;
+      --luigi-green: #43B047;
+      --switch-neon: #FF3C28;
+      --dark-ink: #1e1e24;
+      --bg-pattern: #f0f4f8;
+      --card-white: #ffffff;
+      --border-thick: 3.5px solid var(--dark-ink);
+      --pop-shadow: 5px 5px 0px var(--dark-ink);
+      --pop-shadow-lg: 7px 7px 0px var(--dark-ink);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-pattern);
+      background-image: 
+        radial-gradient(#d3dfe8 20%, transparent 20%),
+        radial-gradient(#d3dfe8 20%, transparent 20%);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      color: var(--dark-ink);
+      font-family: 'Fredoka', sans-serif;
+      padding: 2rem 1rem 5rem;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    /* Top Banner / Header */
+    header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .nintendo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--nintendo-red);
+      color: #fff;
+      padding: 0.5rem 1.4rem;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      border: var(--border-thick);
+      box-shadow: var(--pop-shadow);
+      transform: rotate(-1.5deg);
+      margin-bottom: 1.25rem;
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      color: var(--dark-ink);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      text-shadow: 3px 3px 0 var(--star-yellow);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #555b66;
+    }
+
+    /* Estrutura das Seções */
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 16px;
+      border: var(--border-thick);
+      box-shadow: var(--pop-shadow);
+      margin-bottom: 1.75rem;
+      display: inline-flex;
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .section-header .tag-pill {
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: #fff;
+      border: 2px solid var(--dark-ink);
+    }
+
+    /* SEÇÃO 1: JOGOS ONLINE */
+    .online-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .nintendo-card {
+      background: var(--card-white);
+      border: var(--border-thick);
+      border-radius: 22px;
+      box-shadow: var(--pop-shadow-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .nintendo-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0px var(--dark-ink);
+    }
+
+    /* Cores de topo para cada card online */
+    .card-red { border-top: 14px solid var(--nintendo-red); }
+    .card-blue { border-top: 14px solid var(--mario-blue); }
+    .card-green { border-top: 14px solid var(--luigi-green); }
+
+    .qr-frame {
+      background: #fff;
+      border: var(--border-thick);
+      border-radius: 16px;
+      padding: 0.85rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .qr-frame img {
+      width: 175px;
+      height: 175px;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      color: var(--dark-ink);
+    }
+
+    .btn-nintendo-link {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--star-yellow);
+      color: var(--dark-ink);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
+      border: 2px solid var(--dark-ink);
+      box-shadow: 2px 2px 0px var(--dark-ink);
+      word-break: break-all;
+      transition: all 0.1s;
+    }
+
+    .btn-nintendo-link:hover {
+      background: #ffde38;
+      transform: translateY(-1px);
+    }
+
+    /* SEÇÃO 2: JOGOS FÍSICOS (Estilo Mapa de Fases do Mario) */
+    .physical-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stage-card {
+      background: #ffffff;
+      border: var(--border-thick);
+      border-radius: 20px;
+      box-shadow: var(--pop-shadow);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 155px;
+      transition: transform 0.15s ease;
+    }
+
+    .stage-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .stage-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: #ffeb3b;
+      padding: 0.2rem 0.5rem;
+      border: 2px solid var(--dark-ink);
+      border-radius: 6px;
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+    }
+
+    .stage-card .game-title {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .location-pin-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #eff6ff;
+      border: 2px solid var(--dark-ink);
+      border-radius: 12px;
+      padding: 0.5rem 0.75rem;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #1e3a8a;
+    }
+
+    .location-pin-box .pin-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    /* SEÇÃO 3: DEPÓSITO / JOGOS ANTIGOS (Discreto estilo Game Boy / Acervo Retrô) */
+    .warehouse-section {
+      background: #ded7c8; /* Tom papelão/cartucho envelhecido */
+      border: 3px dashed #6f6758;
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      margin-top: 5rem;
+    }
+
+    .warehouse-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px dashed #9c917d;
+      padding-bottom: 1rem;
+    }
+
+    .warehouse-header h3 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.85rem;
+      color: #4a4437;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .warehouse-header p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #6e6452;
+    }
+
+    .warehouse-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .gb-card {
+      background: #8bac0f; /* Cor clássica da tela do Game Boy DMG */
+      border: 3px solid #306230;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 4px 4px 0px #306230;
+    }
+
+    .gb-qr {
+      background: #9bbc0f;
+      border: 2px solid #0f380f;
+      padding: 0.4rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .gb-qr img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      mix-blend-mode: multiply; /* Efeito integrado com o LCD verde */
+    }
+
+    .gb-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
+      color: #0f380f;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .gb-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #0f380f;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #7b8390;
+      margin-top: 3.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Cabeçalho -->
+    <header>
+      <div class="nintendo-badge">★ FEIRA DE JOGOS ★</div>
+      <h1>Catálogo Interativo</h1>
+      <p>Pegue seu joystick ou aponte a câmera para participar!</p>
+    </header>
+
+    <!-- 1. JOGOS ONLINE -->
+    <section>
+      <div class="section-header">
+        <span style="font-size: 1.6rem;">🌐</span>
+        <h2>Jogos Online</h2>
+        <span class="tag-pill" style="background: var(--nintendo-red);">Jogue Já</span>
+      </div>
+
+      <div class="online-grid">
+
+        <!-- Cyber Moon -->
+        <article class="nintendo-card card-red">
+          <div class="qr-frame">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;data=https://cyber-moon.feira-de-jogos.dev.br" alt="QR Code - Cyber Moon" loading="lazy">
+          </div>
+          <h3 class="game-title">Cyber Moon</h3>
+          <a class="btn-nintendo-link" href="https://cyber-moon.feira-de-jogos.dev.br" target="_blank" rel="noopener">
+            ▶ cyber-moon...dev.br
+          </a>
+        </article>
+
+        <!-- Cyberline Rivals -->
+        <article class="nintendo-card card-blue">
+          <div class="qr-frame">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;data=https://cyberline-rivals.feira-de-jogos.dev.br" alt="QR Code - Cyberline Rivals" loading="lazy">
+          </div>
+          <h3 class="game-title">Cyberline Rivals</h3>
+          <a class="btn-nintendo-link" href="https://cyberline-rivals.feira-de-jogos.dev.br" target="_blank" rel="noopener">
+            ▶ cyberline-rivals...dev.br
+          </a>
+        </article>
+
+        <!-- Nine Lives -->
+        <article class="nintendo-card card-green">
+          <div class="qr-frame">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;data=https://ninelives.feira-de-jogos.dev.br/" alt="QR Code - Nine Lives" loading="lazy">
+          </div>
+          <h3 class="game-title">Nine Lives</h3>
+          <a class="btn-nintendo-link" href="https://ninelives.feira-de-jogos.dev.br/" target="_blank" rel="noopener">
+            ▶ ninelives...dev.br
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 2. JOGOS FÍSICOS (ESTILO MAPA DE ESTANDES) -->
+    <section>
+      <div class="section-header">
+        <span style="font-size: 1.6rem;">🗺️</span>
+        <h2>Jogos Físicos (No Local)</h2>
+        <span class="tag-pill" style="background: var(--mario-blue);">Mapa</span>
+      </div>
+
+      <div class="physical-grid">
+
+        <!-- Bomb.exe -->
+        <article class="stage-card">
+          <div>
+            <span class="stage-badge">Ponto 01</span>
+            <h3 class="game-title">Bomb.exe</h3>
+          </div>
+          <div class="location-pin-box">
+            <span class="pin-icon">📍</span>
+            <span>Hall</span>
+          </div>
+        </article>
+
+        <!-- Rhythm Protocol -->
+        <article class="stage-card">
+          <div>
+            <span class="stage-badge">Ponto 02</span>
+            <h3 class="game-title">Rhythm Protocol</h3>
+          </div>
+          <div class="location-pin-box">
+            <span class="pin-icon">📍</span>
+            <span>Sala 5</span>
+          </div>
+        </article>
+
+        <!-- Cyberduel -->
+        <article class="stage-card">
+          <div>
+            <span class="stage-badge">Ponto 03</span>
+            <h3 class="game-title">Cyberduel</h3>
+          </div>
+          <div class="location-pin-box">
+            <span class="pin-icon">📍</span>
+            <span>Cantinho da marmita</span>
+          </div>
+        </article>
+
+        <!-- SNR -->
+        <article class="stage-card">
+          <div>
+            <span class="stage-badge">Ponto 04</span>
+            <h3 class="game-title">SNR</h3>
+          </div>
+          <div class="location-pin-box">
+            <span class="pin-icon">📍</span>
+            <span>Hall</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3. DEPÓSITO DISCRETO / CARTUCHOS ANTIGOS -->
+    <section class="warehouse-section">
+      <div class="warehouse-header">
+        <h3>📦 [DEPÓSITO RETRÔ] - Fitas &amp; Acervo Clássico</h3>
+        <p>Edições antigas resgatadas do porão e arquivos de backup.</p>
+      </div>
+
+      <div class="warehouse-grid">
+
+        <!-- Ouroboros -->
+        <article class="gb-card">
+          <div class="gb-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&amp;data=https://ouroboros.feira-de-jogos.dev.br" alt="QR Code - Ouroboros" loading="lazy">
+          </div>
+          <h4 class="gb-title">Ouroboros</h4>
+          <a class="gb-link" href="https://ouroboros.feira-de-jogos.dev.br" target="_blank" rel="noopener">
+            ouroboros...dev.br
+          </a>
+        </article>
+
+        <!-- Expelled -->
+        <article class="gb-card">
+          <div class="gb-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&amp;data=https://expelled.feira-de-jogos.dev.br" alt="QR Code - Expelled" loading="lazy">
+          </div>
+          <h4 class="gb-title">Expelled</h4>
+          <a class="gb-link" href="https://expelled.feira-de-jogos.dev.br" target="_blank" rel="noopener">
+            expelled...dev.br
+          </a>
+        </article>
+
+        <!-- Sprint Fox -->
+        <article class="gb-card">
+          <div class="gb-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&amp;data=https://sprint-fox.feira-de-jogos.dev.br" alt="QR Code - Sprint Fox" loading="lazy">
+          </div>
+          <h4 class="gb-title">Sprint Fox</h4>
+          <a class="gb-link" href="https://sprint-fox.feira-de-jogos.dev.br" target="_blank" rel="noopener">
+            sprint-fox...dev.br
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      <p>★ Feira de Jogos — Aperte Start para Jogar! ★</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
