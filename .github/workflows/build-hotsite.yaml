@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "src/**"
+      - ".github/workflows/build-hotsite.yaml"
   workflow_dispatch: {}
 
 jobs:
@@ -27,5 +30,5 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMAGE_NAME="ghcr.io/${{ github.repository }}/snct:latest"
-          docker build -t $IMAGE_NAME ./
+          docker build -t $IMAGE_NAME ./src
           docker push $IMAGE_NAME
